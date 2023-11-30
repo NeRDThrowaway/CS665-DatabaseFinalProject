@@ -1,4 +1,6 @@
-Price,Console,Name,Game_ID
-60,Xbox One,Need for Speed Most Wanted,46
-50,PS4,Call of Duty Black Ops 3,101
-40,Nintendo Switch,Super Smash Bros Ultimate,100201
+Price,Console,Name,Game_ID,Sold_by
+60,Xbox One,Need for Speed Most Wanted,100046,78302971
+40,Nintendo Switch,Super Smash Bros Ultimate,100201,48920132
+30,PS3,Fallout: New Vegas,100582,48773625
+50,PS4,Call of Duty Black Ops 3,200101,44983012
+30,Xbox 360,Halo 3,200489,44983012
