@@ -1,0 +1,6 @@
+-- SQLite
+-- WARNING DO NOT UNCOMMENT
+-- DELETE FROM Employee;
+-- DELETE FROM Games;
+-- DELETE FROM Customers;
+-- DELETE FROM Payments;
