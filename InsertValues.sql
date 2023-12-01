@@ -26,7 +26,7 @@ VALUES ("john", "smith",46892, 100046),
 
 -- SELECT * FROM Customers
 
-INSERT into Payments(trans_id, trans_datetime, trans_price, customerID)
+INSERT into Payments(trans_id, trans_datetime, trans_price, customer)
 VALUES (00001, '2023-01-01', 60, 46892),
 (00002, '2023-01-02', 10, 20546),
 (00003, '2023-01-03', 50, 20547),
