@@ -9,4 +9,4 @@ CREATE TABLE Customers(f_name TEXT NOT NULL, l_name TEXT NOT NULL,
 cust_id INTEGER NOT NULL PRIMARY KEY,  Game_bought INTEGER);
 
 CREATE TABLE Payments(trans_id INTEGER NOT NULL PRIMARY KEY, trans_datetime DATE DEFAULT NULL, 
-trans_price INT DEFAULT NULL, customerID NOT NULL);
+trans_price INT DEFAULT NULL, customer NOT NULL);
