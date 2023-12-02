@@ -86,6 +86,9 @@ class SQLiteGUI:
         # Employee sells game button
         ttk.Button(self.frame, text="Employee Sells Game", command=self.show_games_sold).grid(row=5, column=0, columnspan=3, pady=5)
         
+        # Employee sells game button
+        ttk.Button(self.frame, text="When Customer Purchased", command=self.show_when_games_sold).grid(row=6, column=0, columnspan=3, pady=5)
+        
         # Variables to store selected table and other tables
         self.selected_table = tk.StringVar()
         self.other_tables = tk.StringVar()
@@ -261,7 +264,34 @@ class SQLiteGUI:
                 self.table_listbox.insert(tk.END, entry_with_spacing)
 
         except sqlite3.Error as e:
-            messagebox.showerror("Error", f"Error executing SQL statement: {e}")
+            messagebox.showerror("Error", f"Error executing SQL statement: {e}")  
+
+    def show_when_games_sold(self):
+        try:
+            query = """
+                SELECT Payments.trans_datetime, Customers.f_name as Customer
+                FROM Payments
+                Inner JOIN Customers
+                ON customerID = cust_id;
+            """
+            results = self.cursor.execute(query).fetchall()
+
+            # Clear the current table window before displaying new results
+            self.table_listbox.delete(0, tk.END)
+
+            # Display the column names
+            column_names = ["Date_Purchased", "Customer"]
+            column_names_with_spacing = "\t".join(f"{name:<15}" for name in column_names)
+            self.table_listbox.insert(tk.END, column_names_with_spacing)
+
+            # Display the results with appropriate spacing
+            for entry in results:
+                entry_with_spacing = "\t".join(f"{str(value):<15}" for value in entry)
+                self.table_listbox.insert(tk.END, entry_with_spacing)
+
+        except sqlite3.Error as e:
+            messagebox.showerror("Error", f"Error executing SQL statement: {e}")  
+
 
 if __name__ == "__main__":
     root = tk.Tk()
