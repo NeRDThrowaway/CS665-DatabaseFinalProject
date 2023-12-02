@@ -60,18 +60,18 @@ class SQLiteGUI:
 
         # Table listbox
         ttk.Label(self.frame, text="Tables:").grid(row=1, column=0, sticky=tk.W)
-        self.table_listbox = tk.Listbox(self.frame, height=5)
+        self.table_listbox = tk.Listbox(self.frame, height=7, width= 50)
         self.table_listbox.grid(row=1, column=1, sticky=(tk.W, tk.E), pady=5)
         self.table_listbox.bind("<ButtonRelease-1>", self.display_table)
 
         # Other tables listbox
-        ttk.Label(self.frame, text="Other Tables:").grid(row=1, column=2, sticky=tk.W)
+        ttk.Label(self.frame, text="Other Tables:").grid(row=1, column=3, sticky=tk.S)
         self.other_tables_listbox = tk.Listbox(self.frame, height=5)
-        self.other_tables_listbox.grid(row=1, column=3, sticky=(tk.W, tk.E), pady=5)
+        self.other_tables_listbox.grid(row=2, column=3, sticky=(tk.W, tk.E), pady=5)
 
         # SQL statement entry
         ttk.Label(self.frame, text="SQL Statement:").grid(row=2, column=0, sticky=tk.W)
-        self.sql_entry = tk.Text(self.frame, height=5, width=50)
+        self.sql_entry = tk.Text(self.frame, height=5, width=30)
         self.sql_entry.grid(row=2, column=1, columnspan=2, sticky=(tk.W, tk.E), pady=5)
 
         # Commit button
@@ -86,7 +86,7 @@ class SQLiteGUI:
         # Employee sells game button
         ttk.Button(self.frame, text="Employee Sells Game", command=self.show_games_sold).grid(row=5, column=0, columnspan=3, pady=5)
         
-        # Employee sells game button
+        # When Customer Purchased
         ttk.Button(self.frame, text="When Customer Purchased", command=self.show_when_games_sold).grid(row=6, column=0, columnspan=3, pady=5)
         
         # Variables to store selected table and other tables
