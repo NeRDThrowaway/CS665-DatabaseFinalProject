@@ -6,6 +6,7 @@ SELECT * FROM Employee WHERE Employee.emp_salary > 25000;
 UPDATE Employee SET emp_salary = 30000 WHERE emp_id = 78302971;
 --Delete entries from table
 DELETE FROM Employee WHERE emp_fname = "Marty";
+-- INSERT INTO Employee VALUES ("Marty","Robbins",42000,78302971);
 
 --Generalized forms for Employee below:
 --INSERT INTO Employee VALUES ("emp_fname", "emp_lname", salary, emp_id)

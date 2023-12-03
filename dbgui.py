@@ -60,18 +60,18 @@ class SQLiteGUI:
 
         # Table listbox
         ttk.Label(self.frame, text="Tables:").grid(row=1, column=0, sticky=tk.W)
-        self.table_listbox = tk.Listbox(self.frame, height=5)
+        self.table_listbox = tk.Listbox(self.frame, height=7, width= 50)
         self.table_listbox.grid(row=1, column=1, sticky=(tk.W, tk.E), pady=5)
         self.table_listbox.bind("<ButtonRelease-1>", self.display_table)
 
         # Other tables listbox
         ttk.Label(self.frame, text="Other Tables:").grid(row=1, column=2, sticky=tk.W)
         self.other_tables_listbox = tk.Listbox(self.frame, height=5)
-        self.other_tables_listbox.grid(row=1, column=3, sticky=(tk.W, tk.E), pady=5)
+        self.other_tables_listbox.grid(row=2, column=3, sticky=(tk.W, tk.E), pady=5)
 
         # SQL statement entry
         ttk.Label(self.frame, text="SQL Statement:").grid(row=2, column=0, sticky=tk.W)
-        self.sql_entry = tk.Text(self.frame, height=5, width=50)
+        self.sql_entry = tk.Text(self.frame, height=5, width=30)
         self.sql_entry.grid(row=2, column=1, columnspan=2, sticky=(tk.W, tk.E), pady=5)
 
         # Commit button
@@ -85,6 +85,9 @@ class SQLiteGUI:
 
         # Employee sells game button
         ttk.Button(self.frame, text="Employee Sells Game", command=self.show_games_sold).grid(row=5, column=0, columnspan=3, pady=5)
+        
+        # When Customer Purchased
+        ttk.Button(self.frame, text="When Customer Purchased", command=self.show_when_games_sold).grid(row=6, column=0, columnspan=3, pady=5)
         
         # Variables to store selected table and other tables
         self.selected_table = tk.StringVar()
@@ -262,6 +265,32 @@ class SQLiteGUI:
 
         except sqlite3.Error as e:
             messagebox.showerror("Error", f"Error executing SQL statement: {e}")
+
+    def show_when_games_sold(self):
+        try:
+            query = """
+                SELECT Payments.trans_datetime, Customers.f_name as Customer
+                FROM Payments
+                Inner JOIN Customers
+                ON customerID = cust_id;
+            """
+            results = self.cursor.execute(query).fetchall()
+
+            # Clear the current table window before displaying new results
+            self.table_listbox.delete(0, tk.END)
+
+            # Display the column names
+            column_names = ["Date_Purchased", "Customer"]
+            column_names_with_spacing = "\t".join(f"{name:<15}" for name in column_names)
+            self.table_listbox.insert(tk.END, column_names_with_spacing)
+
+            # Display the results with appropriate spacing
+            for entry in results:
+                entry_with_spacing = "\t".join(f"{str(value):<15}" for value in entry)
+                self.table_listbox.insert(tk.END, entry_with_spacing)
+
+        except sqlite3.Error as e:
+            messagebox.showerror("Error", f"Error executing SQL statement: {e}")  
 
 if __name__ == "__main__":
     root = tk.Tk()
